@@ -1,0 +1,22 @@
+analysis:
+  window_size: 60
+  outlier_method: zscore
+
+visualization:
+  include_rsi: true
+  include_bollinger: true
+  style: seaborn
+  figure_size: [16, 10]
+  dpi: 300
+  save_format: png
+  include_volume: true
+
+output:
+  save_reports: false
+  output_dir: results
+  report_format: csv
+  filename_template: '{symbol}_{analysis_type}'
+  create_subdirs: true
+
+logging_level: INFO
+verbose: false
