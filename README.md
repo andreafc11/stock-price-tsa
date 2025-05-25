@@ -35,7 +35,7 @@ A comprehensive Python package for advanced stock price time series analysis, fe
 1. Clone the repository:
 ```bash
 git clone https://github.com/andreafc11/stock-price-tsa.git
-cd stock
+cd stock-price-tsa
 ```
 
 2. Create and activate virtual environment:
@@ -104,7 +104,7 @@ The application supports YAML and JSON configuration files for advanced customiz
 
 ### Create Default Configuration
 ```bash
-python3 -c "from config import create_default_config; create_default_config()"
+python3 -c "from config import create_default_config; create_default_config()"  # Run from project root
 ```
 
 ### Configuration Options
