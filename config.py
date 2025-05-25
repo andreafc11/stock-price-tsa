@@ -3,7 +3,7 @@ import os
 import json
 import yaml
 from typing import Dict, Any, Optional
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, asdict, field
 from pathlib import Path
 
 @dataclass
@@ -20,29 +20,25 @@ class AnalysisConfig:
 @dataclass
 class VisualizationConfig:
     """Configuration for visualization settings."""
-    figure_size: tuple = (16, 10)
+    figure_size: tuple[int, int] = (16, 10)
     dpi: int = 300
     style: str = 'seaborn-v0_8-darkgrid'
-    color_scheme: Dict[str, str] = None
+    color_scheme: Dict[str, str] = field(default_factory=lambda: {
+        'price': '#2E86AB',
+        'ma': '#A23B72',
+        'ema': '#F18F01',
+        'volatility': '#F18F01',
+        'trend': '#C73E1D',
+        'bollinger': 'red',
+        'rsi': '#A23B72',
+        'volume': '#2E86AB',
+        'outliers': 'red'
+    })
     include_volume: bool = True
     include_bollinger: bool = False
     include_rsi: bool = False
     save_format: str = 'png'  # 'png', 'pdf', 'svg'
     
-    def __post_init__(self):
-        if self.color_scheme is None:
-            self.color_scheme = {
-                'price': '#2E86AB',
-                'ma': '#A23B72',
-                'ema': '#F18F01',
-                'volatility': '#F18F01',
-                'trend': '#C73E1D',
-                'bollinger': 'red',
-                'rsi': '#A23B72',
-                'volume': '#2E86AB',
-                'outliers': 'red'
-            }
-
 @dataclass
 class OutputConfig:
     """Configuration for output settings."""

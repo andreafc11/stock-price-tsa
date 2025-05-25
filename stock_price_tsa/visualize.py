@@ -4,7 +4,6 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-from datetime import datetime
 from stock_price_tsa.analysis import (
     moving_average, volatility, linear_regression_trend, 
     bollinger_bands, rsi, exponential_moving_average, detect_outliers
@@ -196,8 +195,8 @@ def generate_summary_report(stock_file: str, window_size: int = 30) -> Dict[str,
     stock_data.sort_index(inplace=True)
     
     closing_prices = stock_data['Close']
-    
-    # Basic statistics
+    # Cache volatility result to avoid recomputation
+    vol_result = volatility(closing_prices, window_size)
     report = {
         'symbol': os.path.basename(stock_file).split("_")[0].upper(),
         'period': {
@@ -215,8 +214,8 @@ def generate_summary_report(stock_file: str, window_size: int = 30) -> Dict[str,
             'change_pct': ((closing_prices.iloc[-1] - closing_prices.iloc[0]) / closing_prices.iloc[0]) * 100
         },
         'volatility_stats': {
-            'avg_volatility': volatility(closing_prices, window_size).mean(),
-            'max_volatility': volatility(closing_prices, window_size).max(),
+            'avg_volatility': vol_result.mean(),
+            'max_volatility': vol_result.max(),
         },
         'trend_analysis': {
             'overall_trend': 'Upward' if closing_prices.iloc[-1] > closing_prices.iloc[0] else 'Downward',

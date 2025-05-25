@@ -93,8 +93,8 @@ def bollinger_bands(data: pd.Series, window_size: int = 20, num_std: float = 2) 
     Returns:
         Tuple[pd.Series, pd.Series, pd.Series]: Moving average, upper band, lower band.
     """
-    ma = moving_average(data, window_size)
-    std = volatility(data, window_size)
+    ma = data.rolling(window=window_size, min_periods=window_size).mean()
+    std = data.rolling(window=window_size, min_periods=window_size).std()
     
     upper_band = ma + (std * num_std)
     lower_band = ma - (std * num_std)
