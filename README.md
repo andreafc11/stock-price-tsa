@@ -34,7 +34,7 @@ A comprehensive Python package for advanced stock price time series analysis, fe
 ### Setup
 1. Clone the repository:
 ```bash
-git clone https://github.com/andreafc11/stock.git
+git clone https://github.com/andreafc11/stock-price-tsa.git
 cd stock
 ```
 
